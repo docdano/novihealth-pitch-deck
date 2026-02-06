@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoviHealth | Go-to-Market Strategy</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/black.css">
+    <style>
+        :root {
+            --r-background-color: #0a0a0f;
+            --r-main-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --r-heading-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --r-heading-color: #ffffff;
+            --r-main-color: #e0e0e0;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-yellow: #f59e0b;
+            --accent-purple: #8b5cf6;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        .reveal { font-family: var(--r-main-font); font-size: 32px; }
+        .reveal h1 { font-size: 2.2em; font-weight: 700; margin-bottom: 0.3em; }
+        .reveal h2 { font-size: 1.7em; font-weight: 700; margin-bottom: 0.35em; }
+        .reveal h3 { font-size: 1.15em; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.25em; }
+        .reveal p { font-size: 1em; line-height: 1.45; margin-bottom: 0.4em; }
+        .reveal li { font-size: 0.95em; line-height: 1.35; margin-bottom: 0.2em; }
+        .reveal ul, .reveal ol { margin: 0.2em 0; padding-left: 1.2em; }
+        .reveal .slides section { text-align: left; padding: 15px 25px; box-sizing: border-box; overflow: hidden; }
+        .section-divider { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; }
+        .section-divider h1 { font-size: 2.5em; }
+        .section-number { font-size: 3.5em; font-weight: 800; color: var(--accent-blue); opacity: 0.15; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: -1; }
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0; }
+        .stat-box { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 8px; padding: 10px 8px; text-align: center; }
+        .stat-number { font-size: 2em; font-weight: 800; color: var(--accent-blue); }
+        .stat-label { font-size: 0.75em; color: #999; margin-top: 5px; text-transform: uppercase; }
+        .quote-box { background: rgba(16, 185, 129, 0.08); border-left: 4px solid var(--accent-green); padding: 12px 16px; margin: 12px 0; font-size: 1em; font-style: italic; border-radius: 0 6px 6px 0; }
+        .reveal table { font-size: 0.85em; border-collapse: collapse; width: 100%; margin: 12px 0; }
+        .reveal table th { background: rgba(59, 130, 246, 0.12); color: var(--accent-blue); font-weight: 600; padding: 6px 8px; border-bottom: 1px solid var(--accent-blue); text-align: left; }
+        .reveal table td { padding: 5px 8px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .pill { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.8em; font-weight: 600; }
+        .pill-green { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+        .pill-yellow { background: rgba(245, 158, 11, 0.2); color: var(--accent-yellow); }
+        .pill-blue { background: rgba(59, 130, 246, 0.2); color: var(--accent-blue); }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 10px; }
+        .card h3 { margin-top: 0; margin-bottom: 6px; }
+        .highlight-blue { color: var(--accent-blue); }
+        .highlight-green { color: var(--accent-green); }
+        .highlight-red { color: var(--accent-red); }
+        .highlight-yellow { color: var(--accent-yellow); }
+        .framework-box { background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 8px; padding: 10px 14px; margin: 8px 0; }
+        .cost-cascade { display: flex; flex-direction: column; gap: 3px; }
+        .cascade-item { display: flex; align-items: center; padding: 6px 12px; border-radius: 4px; font-size: 0.9em; }
+        .cascade-item .time { width: 70px; font-weight: 600; }
+        .cascade-item .event { flex: 1; }
+        .cascade-item .cost { font-weight: 700; width: 70px; text-align: right; }
+        .cascade-low { background: rgba(16, 185, 129, 0.1); }
+        .cascade-med { background: rgba(245, 158, 11, 0.1); }
+        .cascade-high { background: rgba(239, 68, 68, 0.1); }
+        .cascade-critical { background: rgba(239, 68, 68, 0.2); }
+        .timeline { padding-left: 20px; position: relative; }
+        .timeline::before { content: ''; position: absolute; left: 4px; top: 0; bottom: 0; width: 2px; background: linear-gradient(var(--accent-blue), var(--accent-purple)); }
+        .timeline-item { position: relative; margin-bottom: 8px; }
+        .timeline-item::before { content: ''; position: absolute; left: -18px; top: 3px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-blue); }
+        .timeline-item h3 { margin-bottom: 1px; }
+        .timeline-item p { margin: 0; font-size: 0.9em; color: #999; }
+        .small { font-size: 0.85em; color: #888; }
+        .title-slide { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: 100%; }
+        .title-slide h1 { font-size: 2.8em; margin-bottom: 0.2em; }
+        .title-slide .subtitle { font-size: 1.3em; color: var(--accent-blue); margin-bottom: 1em; }
+        .title-slide .meta { font-size: 1em; color: #888; }
+        .competitor-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 8px 10px; margin-bottom: 6px; }
+        .competitor-card h4 { margin: 0 0 5px 0; color: var(--accent-blue); font-size: 1em; }
+        .competitor-card .price { font-size: 1.1em; font-weight: 700; color: var(--accent-green); }
+        .competitor-card ul { margin: 6px 0 0 0; padding-left: 16px; }
+        .competitor-card li { font-size: 0.85em; margin-bottom: 3px; }
+        .reveal .controls { color: var(--accent-blue); }
+        .reveal .progress { color: var(--accent-blue); height: 2px; }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- TITLE -->
+            <section>
+                <div class="title-slide">
+                    <h1>NoviHealth</h1>
+                    <div class="subtitle">Go-to-Market Strategy Workshop</div>
+                    <p class="meta">Whiteboard Session | February 6, 2026<br>
+                    <span style="color: var(--accent-blue);">Pricing | Positioning | Health Plan Integration</span></p>
+                </div>
+            </section>
+
+            <!-- AGENDA -->
+            <section>
+                <h2>Session Agenda</h2>
+                <div class="timeline">
+                    <div class="timeline-item"><h3>The 2026 Reality</h3><p>20% trend and network dynamics</p></div>
+                    <div class="timeline-item"><h3>The Cancer Cost Crisis</h3><p>Why employers are paying attention</p></div>
+                    <div class="timeline-item"><h3>Competitive Landscape</h3><p>GRAIL, Color, Invitae, 2nd.MD</p></div>
+                    <div class="timeline-item"><h3>Three Timing Problems</h3><p>Test cost, Year 1 bolus, delayed payback</p></div>
+                    <div class="timeline-item"><h3>Pricing Strategy</h3><p>$1,250 blended vs. unbundled</p></div>
+                    <div class="timeline-item"><h3>Self-Funded Positioning</h3><p>ERS/TRS network advantage</p></div>
+                    <div class="timeline-item"><h3>Health Plan Partnership</h3><p>Blue Cross first strategy</p></div>
+                </div>
+            </section>
+
+            <!-- SECTION 1 -->
+            <section>
+                <div class="section-divider">
+                    <span class="section-number">01</span>
+                    <h1>The 2026 Reality</h1>
+                    <p style="color: var(--accent-blue);">20% trend and network dynamics</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>The 20% Trend Trap</h2>
+                <p>Employers on PPO networks facing 20% increases are in <strong>cost-cutting mode</strong>.</p>
+                <table>
+                    <thead><tr><th>Path</th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>3-Year</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Do Nothing</strong></td><td>$100</td><td>$120</td><td>$144</td><td class="highlight-red">$364</td></tr>
+                        <tr style="background:rgba(16,185,129,0.1);"><td><strong>Invest</strong></td><td>$100+inv</td><td>$110</td><td>$121</td><td class="highlight-green">$331+</td></tr>
+                    </tbody>
+                </table>
+                <div class="quote-box">"You can't cut your way out of 20%. You have to bend the curve."</div>
+            </section>
+
+            <section>
+                <h2>Network Dynamics: The ERS Advantage</h2>
+                <table>
+                    <thead><tr><th>Pool</th><th>Network</th><th>Trend</th><th>Implication</th></tr></thead>
+                    <tbody>
+                        <tr style="background:rgba(16,185,129,0.1);"><td><strong>ERS</strong></td><td>HMO (Blue Essentials)</td><td class="highlight-green">Lower</td><td>Budget headroom for investment</td></tr>
+                        <tr><td>TRS</td><td>PPO (may move HMO)</td><td>Higher</td><td>Harder, but transition = opportunity</td></tr>
+                        <tr style="color:#888;"><td>Traditional</td><td>PPO</td><td class="highlight-red">20%+</td><td>Cutting mode, not investing</td></tr>
+                    </tbody>
+                </table>
+                <div class="framework-box">
+                    <p><strong>Key insight:</strong> ERS's HMO network has maintained more stability. They can invest strategically while PPO employers are in crisis mode.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>What's Driving 20% Trend?</h2>
+                <div class="two-col">
+                    <div>
+                        <h3>Utilization Optimization</h3>
+                        <ul>
+                            <li>AI-driven billing optimization</li>
+                            <li>Providers capturing accurate codes</li>
+                            <li>This is a <em>permanent reset</em></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Treatment Costs</h3>
+                        <ul>
+                            <li>Specialty drugs: $47+ PMPM</li>
+                            <li>CAR-T: $400K+/treatment</li>
+                            <li>GLP-1s: $11-24 PMPM</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="quote-box">This isn't a one-year spike—it's a playbook reset. Invest now = compound savings.</div>
+            </section>
+
+            <!-- SECTION 2 -->
+            <section>
+                <div class="section-divider">
+                    <span class="section-number">02</span>
+                    <h1>The Cancer Cost Crisis</h1>
+                    <p style="color: var(--accent-blue);">Why this moment matters</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Something Unprecedented Happened</h2>
+                <div class="quote-box">"For the first time, cancer patients dominated the top 10 claimant lists. Not heart disease. Not diabetes. <strong>Cancer.</strong>"</div>
+                <div class="stat-grid">
+                    <div class="stat-box"><div class="stat-number">6/10</div><div class="stat-label">Top claimants = cancer</div></div>
+                    <div class="stat-box"><div class="stat-number">55%</div><div class="stat-label">Cite cancer as #1 cost</div></div>
+                    <div class="stat-box"><div class="stat-number">21%</div><div class="stat-label">Annual cancer trend</div></div>
+                </div>
+                <p class="small">Source: Business Group on Health 2025</p>
+            </section>
+
+            <section>
+                <h2>The Cost Cascade</h2>
+                <div class="cost-cascade">
+                    <div class="cascade-item cascade-low"><span class="time">Mo 1-3</span><span class="event">Symptoms ignored</span><span class="cost highlight-green">$0</span></div>
+                    <div class="cascade-item cascade-low"><span class="time">Mo 4-6</span><span class="event">Primary care visits</span><span class="cost highlight-green">$2K</span></div>
+                    <div class="cascade-item cascade-med"><span class="time">Mo 7-9</span><span class="event">Specialists, imaging</span><span class="cost highlight-yellow">$15K</span></div>
+                    <div class="cascade-item cascade-high"><span class="time">Mo 10-12</span><span class="event">Emergency diagnosis</span><span class="cost highlight-red">$200K+</span></div>
+                    <div class="cascade-item cascade-critical"><span class="time">Mo 13-24</span><span class="event">Advanced treatment</span><span class="cost highlight-red">$500K+</span></div>
+                </div>
+            </section>
+
+            <section>
+                <h2>The Core Value Proposition</h2>
+                <div class="quote-box" style="font-size:1.1em; text-align:center; padding:20px;">
+                    <strong>3</strong> out of 10 people will get cancer.<br><br>
+                    <strong>7</strong> out of 10 may die from delayed diagnosis.<br><br>
+                    <strong>100%</strong> will face delays that double costs.<br><br>
+                    <span class="highlight-green">NoviHealth changes these numbers.</span>
+                </div>
+            </section>
+
+            <!-- SECTION 3 -->
+            <section>
+                <div class="section-divider">
+                    <span class="section-number">03</span>
+                    <h1>Competitive Landscape</h1>
+                    <p style="color: var(--accent-blue);">Who else is in this space?</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>The Major Players</h2>
+                <div class="two-col">
+                    <div>
+                        <div class="competitor-card"><h4>GRAIL Galleri</h4><div class="price">$949/test</div><ul><li>Blood test, 50+ cancers</li><li>No navigation</li><li>TRICARE covers (50+)</li></ul></div>
+                        <div class="competitor-card"><h4>Color Health</h4><div class="price">$250-400/test</div><ul><li>19-gene panel</li><li>Virtual Cancer Clinic</li></ul></div>
+                    </div>
+                    <div>
+                        <div class="competitor-card"><h4>Invitae</h4><div class="price">$350-500/test</div><ul><li>167+ genes</li><li>Counselor sessions</li></ul></div>
+                        <div class="competitor-card"><h4>2nd.MD</h4><div class="price">Case Rate</div><ul><li>Second opinions</li><li>Reactive, not preventive</li></ul></div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Competitor Comparison</h2>
+                <table>
+                    <thead><tr><th>Feature</th><th>GRAIL</th><th>Color</th><th>Invitae</th><th class="highlight-green">NoviHealth</th></tr></thead>
+                    <tbody>
+                        <tr><td>Price</td><td>$949</td><td>$250-400</td><td>$350-500</td><td class="highlight-green">$1,250</td></tr>
+                        <tr><td>Testing</td><td>Blood cfDNA</td><td>Gene panels</td><td>Gene panels</td><td class="highlight-green">Whole Genome</td></tr>
+                        <tr><td>Counseling</td><td>None</td><td>Limited</td><td>Included</td><td class="highlight-green">Certified, ongoing</td></tr>
+                        <tr><td>Navigation</td><td>None</td><td>Varies</td><td>Limited</td><td class="highlight-green">24 months</td></tr>
+                        <tr><td>Family</td><td>No</td><td>Extra</td><td>Extra</td><td class="highlight-green">Included</td></tr>
+                    </tbody>
+                </table>
+                <p class="small"><strong>Key:</strong> NoviHealth's $1,250 includes WGS + 24mo navigation + family cascade.</p>
+            </section>
+
+            <!-- SECTION 4 -->
+            <section>
+                <div class="section-divider">
+                    <span class="section-number">04</span>
+                    <h1>Three Timing Problems</h1>
+                    <p style="color: var(--accent-blue);">Cost, bolus, delayed payback</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Problem 1: Upfront Test Cost</h2>
+                <div class="two-col">
+                    <div><h3>Objection</h3><ul><li>$1,250 = immediate cash out</li><li>20% trend = "stop bleeding" mode</li><li>Psychological barrier</li></ul></div>
+                    <div><h3>Reframe</h3><ul><li>= 3 months of GLP-1</li><li>One prevented case = 400 tests</li><li>"Already spending this on treatment"</li></ul></div>
+                </div>
+                <div class="quote-box">"You're not adding a cost—you're buying trend insurance."</div>
+            </section>
+
+            <section>
+                <h2>Problem 2: The "First Year Bolus"</h2>
+                <div class="two-col">
+                    <div><h3>Objection</h3><ul><li>Initial screening = catch-up</li><li>Year 1 finds MORE positives</li><li>Triggers imaging, biopsies</li><li><strong>Year 1 costs SPIKE</strong></li></ul></div>
+                    <div><h3>Reframe</h3><ul><li>Those cancers were coming</li><li>Stage 1 Year 1 vs Stage 3 Year 3</li><li>Bolus = paying down risk debt</li><li>After Year 1, normalizes</li></ul></div>
+                </div>
+                <div class="quote-box">"Would you rather find Stage 1 now, or Stage 3 in three years?"</div>
+            </section>
+
+            <section>
+                <h2>Problem 3: Delayed Payback</h2>
+                <div class="framework-box">
+                    <table>
+                        <tr><td><strong>Costs:</strong></td><td>Year 0-2 (test + navigation)</td></tr>
+                        <tr><td><strong>Benefits:</strong></td><td>Year 3-10+ (avoided claims)</td></tr>
+                        <tr><td><strong>Traditional employer:</strong></td><td class="highlight-red">1-3 year horizon = misalignment</td></tr>
+                        <tr><td><strong>ERS/TRS:</strong></td><td class="highlight-green">20+ year horizon = alignment</td></tr>
+                    </table>
+                </div>
+                <div class="quote-box">"That's why this fits ERS/TRS. You're not a 3-year employer—you're a 20-year benefits manager."</div>
+            </section>
+
+            <section>
+                <h2>Objection Response Matrix</h2>
+                <table>
+                    <thead><tr><th>Objection</th><th>Reframe</th></tr></thead>
+                    <tbody>
+                        <tr><td class="highlight-red">"Too expensive"</td><td>One prevented case pays for 400 tests.</td></tr>
+                        <tr><td class="highlight-red">"Year 1 will spike"</td><td>Stage 1 in Year 1 vs Stage 3 in Year 3.</td></tr>
+                        <tr><td class="highlight-red">"Benefits downstream"</td><td>You're a 20-year manager, not 3-year employer.</td></tr>
+                        <tr><td class="highlight-red">"20% = cut costs"</td><td>Can't cut your way out. Bend the curve.</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- SECTION 5 -->
+            <section>
+                <div class="section-divider">
+                    <span class="section-number">05</span>
+                    <h1>Pricing Strategy</h1>
+                    <p style="color: var(--accent-blue);">Blended vs. unbundled</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Two Pricing Models</h2>
+                <div class="two-col">
+                    <div class="card" style="border-color: var(--accent-green);">
+                        <h3 class="highlight-green">Blended Rate</h3>
+                        <div style="font-size:1.6em; font-weight:800; margin:8px 0;">$1,250</div>
+                        <p>per eligible member</p>
+                        <ul><li>Whole genome sequencing</li><li>Genetic counselor</li><li>24 months navigation</li><li>Family cascade testing</li></ul>
+                        <p class="small highlight-green">Simple, predictable</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="color:#888;">Unbundled</h3>
+                        <div style="font-size:1.2em; color:#888; margin:8px 0;">$710 + $2,840 + $90/mo</div>
+                        <p style="color:#888;">variable by positive rate</p>
+                        <ul style="color:#888;"><li>$710 = test (everyone)</li><li>$2,840 = positive upfront</li><li>$90/mo × 24 = navigation</li></ul>
+                        <p class="small">Complex, variable</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>The Math: Blended vs. Unbundled</h2>
+                <p>Assuming 15.5% positive rate across 100 members:</p>
+                <table>
+                    <thead><tr><th>Model</th><th>Calculation</th><th>Total</th><th>Per Member</th></tr></thead>
+                    <tbody>
+                        <tr style="background:rgba(16,185,129,0.1);"><td><strong>Blended</strong></td><td>100 × $1,250</td><td>$125,000</td><td class="highlight-green">$1,250</td></tr>
+                        <tr><td>Unbundled</td><td>100×$710 + 15.5×($2,840+$2,160)</td><td>~$148,500</td><td>~$1,485</td></tr>
+                    </tbody>
+                </table>
+                <div class="framework-box"><p><strong>Insight:</strong> Blended is <strong>cheaper</strong> for employer. NoviHealth takes engagement risk.</p></div>
+            </section>
+
+            <section>
+                <h2>Pricing Positioning</h2>
+                <div class="three-col">
+                    <div class="card"><h3>"Less Than GLP-1s"</h3><p>$1,250 = 3 months of GLP-1 drugs</p></div>
+                    <div class="card"><h3>"One Pays for 400"</h3><p>$500K prevented = 400 tests</p></div>
+                    <div class="card"><h3>"Shift the Spend"</h3><p>Already spending on treatment</p></div>
+                </div>
+            </section>
+
+            <!-- SECTION 6 -->
+            <section>
+                <div class="section-divider">
+                    <span class="section-number">06</span>
+                    <h1>Self-Funded Positioning</h1>
+                    <p style="color: var(--accent-blue);">ERS network advantage</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>The Myopia Problem</h2>
+                <table>
+                    <thead><tr><th>Buyer</th><th>Horizon</th><th>Mindset</th><th>Fit</th></tr></thead>
+                    <tbody>
+                        <tr style="color:#888;"><td>Traditional</td><td>1-3 yrs</td><td>"Why pay for 5 yrs out?"</td><td class="highlight-red">Poor</td></tr>
+                        <tr><td>Municipal</td><td>3-5 yrs</td><td>"Long-term savings"</td><td class="highlight-yellow">OK</td></tr>
+                        <tr style="background:rgba(16,185,129,0.1);"><td><strong>ERS/TRS</strong></td><td><strong>20+ yrs</strong></td><td><strong>"Lifetime risk"</strong></td><td class="highlight-green"><strong>Excellent</strong></td></tr>
+                    </tbody>
+                </table>
+                <div class="quote-box">"You're not an employer—you're a lifetime benefits manager."</div>
+            </section>
+
+            <section>
+                <h2>Primary Targets: ERS & TRS</h2>
+                <div class="two-col">
+                    <div class="card" style="border-color: var(--accent-green);">
+                        <h3 class="highlight-green">ERS (First Target)</h3>
+                        <ul>
+                            <li><strong>480,000 members</strong></li>
+                            <li>HMO network = lower trend</li>
+                            <li>More budget flexibility</li>
+                            <li>Health-focused leadership</li>
+                            <li>Simpler integration</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>TRS (Secondary)</h3>
+                        <ul>
+                            <li><strong>500,000 members</strong></li>
+                            <li>PPO (may move HMO)</li>
+                            <li>HMO transition = opportunity</li>
+                            <li>Cost-oriented leadership</li>
+                            <li>Teachers = 25-30 yr careers</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="small"><strong>Also:</strong> TAC (135 counties) — faster cycle, one sale = massive coverage</p>
+            </section>
+
+            <section>
+                <h2>The "Future Self" Argument</h2>
+                <div class="quote-box" style="font-size:1em; padding:15px;">
+                    "When a 35-year-old teacher tests positive for Lynch syndrome today, you're not just helping her—you're helping <strong>the 55-year-old she'll become</strong>.<br><br>
+                    The one who would otherwise be diagnosed at Stage 3 and cost $400,000.<br><br>
+                    <span class="highlight-green">That future employee is your member today.</span>"
+                </div>
+            </section>
+
+            <!-- SECTION 7 -->
+            <section>
+                <div class="section-divider">
+                    <span class="section-number">07</span>
+                    <h1>Health Plan Partnership</h1>
+                    <p style="color: var(--accent-blue);">Blue Cross first</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>The 2nd.MD Playbook</h2>
+                <div class="two-col">
+                    <div class="card" style="border-color: var(--accent-red);"><h3 class="highlight-red">Direct to Employers</h3><ul><li>Plans see threat</li><li>Block deals</li><li>Longer cycles</li></ul></div>
+                    <div class="card" style="border-color: var(--accent-green);"><h3 class="highlight-green">Partner with Plans</h3><ul><li>Plans become advocates</li><li>Accelerate deals</li><li>Plans sell for you</li></ul></div>
+                </div>
+                <div class="framework-box"><p><strong>Morgan Stanley Model:</strong> Client champion positioned 2nd.MD as "helping employees." Health plan became advocate.</p></div>
+            </section>
+
+            <section>
+                <h2>Blue Cross Texas Strategy</h2>
+                <div class="two-col">
+                    <div>
+                        <h3>Key Contacts</h3>
+                        <ul><li><strong>Claire York</strong> — EVP, ERS/TRS</li><li><strong>Heather Linton</strong> — SVP Sales</li></ul>
+                        <h3>Context</h3>
+                        <ul><li>7,000+ now report to Chicago</li><li>Medical affairs: 600 → 20</li></ul>
+                    </div>
+                    <div>
+                        <h3>The Opportunity</h3>
+                        <p>Blue Cross needs solutions that don't require internal resources.</p>
+                        <div class="quote-box">"NoviHealth is turnkey. You bring members. We handle everything."</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Three Paths to Payment</h2>
+                <div class="three-col">
+                    <div class="card"><h3>ASO</h3><p><span class="pill pill-green">Fastest</span></p><ul><li>Value-add for self-funded</li><li>6-9 month timeline</li></ul></div>
+                    <div class="card"><h3>Claims Wire</h3><p><span class="pill pill-yellow">Full</span></p><ul><li>Covered benefit</li><li>12-18 months</li></ul></div>
+                    <div class="card"><h3>Pilot</h3><p><span class="pill pill-blue">Low Risk</span></p><ul><li>10K-50K members</li><li>Prove ROI first</li></ul></div>
+                </div>
+            </section>
+
+            <!-- SECTION 8 -->
+            <section>
+                <div class="section-divider">
+                    <span class="section-number">08</span>
+                    <h1>ROI vs. "Right Thing"</h1>
+                    <p style="color: var(--accent-blue);">Speaking both languages</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>The Two-Story Problem</h2>
+                <div class="two-col">
+                    <div class="card" style="border-color: var(--accent-blue);"><h3 class="highlight-blue">CFO Story</h3><p style="font-style:italic;">"Show me the numbers."</p><ul><li>Spreadsheet-driven</li><li>Wants payback period</li></ul></div>
+                    <div class="card" style="border-color: var(--accent-purple);"><h3 style="color:var(--accent-purple);">HR Story</h3><p style="font-style:italic;">"Take care of our people."</p><ul><li>Values-driven</li><li>Wants employee impact</li></ul></div>
+                </div>
+                <p><strong>You need both.</strong> Lead with values, bridge to numbers, close with values.</p>
+            </section>
+
+            <section>
+                <h2>Stakeholder Weighting</h2>
+                <table>
+                    <thead><tr><th>Stakeholder</th><th>ROI</th><th>Values</th><th>Lead With</th></tr></thead>
+                    <tbody>
+                        <tr><td>CFO</td><td class="highlight-blue">80%</td><td>20%</td><td>Numbers first</td></tr>
+                        <tr><td>HR Director</td><td>40%</td><td style="color:var(--accent-purple);">60%</td><td>Values first</td></tr>
+                        <tr><td>CEO</td><td>50%</td><td>50%</td><td>Balance + legacy</td></tr>
+                        <tr><td>Board</td><td class="highlight-blue">60%</td><td>40%</td><td>Fiduciary + care</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>The Moral Escalation</h2>
+                <div class="quote-box"><h3 style="margin-top:0;">To the CEO</h3><p>"If an employee dies of preventable cancer, and their family learns you had the chance to catch it early... <strong class="highlight-red">what's the ROI on that?</strong>"</p></div>
+                <div class="quote-box" style="border-left-color:var(--accent-purple);"><h3 style="margin-top:0;">To the Board</h3><p>"Fiduciary duty + duty of care. The question isn't whether you can afford this—it's <strong class="highlight-green">whether you can afford not to</strong>."</p></div>
+            </section>
+
+            <!-- DISCUSSION -->
+            <section>
+                <div class="section-divider">
+                    <h1>Discussion Questions</h1>
+                    <p style="color: var(--accent-blue);">For the whiteboard</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Questions to Resolve</h2>
+                <div class="two-col">
+                    <div>
+                        <h3>Pricing</h3>
+                        <ol><li>Is $1,250 the right anchor?</li><li>Money-back guarantee?</li><li>Pay-for-positives viable?</li></ol>
+                        <h3>Timing</h3>
+                        <ol><li>How to quantify Year 1 bolus?</li><li>Payback timeline to claim?</li></ol>
+                    </div>
+                    <div>
+                        <h3>Positioning</h3>
+                        <ol><li>ERS and TRS simultaneous?</li><li>TAC as faster revenue?</li><li>Leverage TRS HMO transition?</li></ol>
+                        <h3>Health Plans</h3>
+                        <ol><li>Blue Cross only or also UHC?</li><li>ASO first or claims wire?</li></ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CLOSING -->
+            <section>
+                <div class="title-slide">
+                    <h1>Let's Build the Plan</h1>
+                    <div class="subtitle">Whiteboard Session</div>
+                    <div class="stat-grid" style="margin-top:20px;">
+                        <div class="stat-box"><div class="stat-label">Pricing</div><p class="small">$1,250 blended</p></div>
+                        <div class="stat-box"><div class="stat-label">Target</div><p class="small">ERS first (HMO advantage)</p></div>
+                        <div class="stat-box"><div class="stat-label">Path</div><p class="small">Blue Cross partner</p></div>
+                    </div>
+                    <p class="meta" style="margin-top:30px;">NoviHealth + RocketTools | February 2026</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'slide',
+            center: false,
+            margin: 0.05,
+            width: 1280,
+            height: 720
+        });
+    </script>
+</body>
+</html>
